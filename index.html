@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Barış & Helin | Premium Dijital Davetiye</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            background: #0a0806;
+        }
+
+        /* Premium Arka Plan - Fotoğraf + Koyu Gradyan + Bulanıklık */
+        .premium-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(12px) brightness(0.4) contrast(1.2);
+            transform: scale(1.05);
+            transition: filter 0.3s ease;
+        }
+
+        /* Derin karanlık overlay */
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(10,8,6,0.6) 0%, rgba(0,0,0,0.85) 100%);
+            z-index: 1;
+        }
+
+        /* Altın parıltılı ışık hüzmeleri */
+        .light-rays {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(115deg, 
+                rgba(212,175,55,0.03) 0px, 
+                rgba(212,175,55,0.03) 1px,
+                transparent 1px,
+                transparent 40px);
+            pointer-events: none;
+            z-index: 2;
+            animation: slowPan 20s linear infinite;
+        }
+
+        @keyframes slowPan {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        /* Gelişmiş yıldız / parıltı sistemi */
+        .stars-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .star-particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd966, #d4af37);
+            border-radius: 50%;
+            opacity: 0;
+            animation: starFloat 4s infinite alternate;
+            box-shadow: 0 0 12px rgba(212,175,55,0.6);
+        }
+
+        @keyframes starFloat {
+            0% { opacity: 0.2; transform: translateY(0px) scale(1);}
+            100% { opacity: 0.9; transform: translateY(-20px) scale(1.2);}
+        }
+
+        /* Ana Container */
+        .container {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Çiçek süsleme - altın halkalar */
+        .floral-decoration {
+            font-size: 2.6rem;
+            color: #e4bc5c;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(212,175,55,0.5);
+            animation: gentlePulse 3s infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; text-shadow: 0 0 5px #d4af37; }
+            50% { transform: scale(1.08); opacity: 1; text-shadow: 0 0 25px #ffdf80; }
+        }
+
+        /* İsimler - Lüks Tipografi */
+        .names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 600;
+            color: #fff9ef;
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 25px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.3);
+        }
+
+        .names span {
+            color: #e4bc5c;
+            margin: 0 20px;
+            font-weight: 700;
+            text-shadow: 0 0 12px #d4af37;
+        }
+
+        /* Altın Çizgi - Daha zarif */
+        .divider {
+            width: 180px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e4bc5c, #ffdfa0, #e4bc5c, transparent);
+            margin: 25px auto;
+            box-shadow: 0 0 8px rgba(212,175,55,0.8);
+        }
+
+        /* Alt başlık */
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: #d8cba4;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 55px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 24px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Buton - Premium Işıltılı */
+        .open-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #b3862d 50%, #8b621a 100%);
+            border: none;
+            padding: 24px 65px;
+            border-radius: 70px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1f1b14;
+            cursor: pointer;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 2px rgba(212,175,55,0.3), 0 0 30px rgba(212,175,55,0.5);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .open-btn::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,245,180,0.5) 0%, rgba(255,215,0,0) 70%);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .open-btn:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 30px 55px rgba(0,0,0,0.7), 0 0 0 3px rgba(212,175,55,0.6), 0 0 45px #e4bc5c;
+            letter-spacing: 6px;
+        }
+
+        .open-btn:hover::before {
+            opacity: 1;
+            transform: translateX(30%) rotate(25deg);
+        }
+
+        .open-btn i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+
+        /* ZARF OVERLAY - 3D GELİŞMİŞ */
+        .envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.96) 0%, #050302 100%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+            backdrop-filter: blur(8px);
+        }
+
+        .envelope-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s ease, visibility 0s linear 0s;
+        }
+
+        /* 3D Zarf */
+        .envelope {
+            position: relative;
+            width: 420px;
+            height: 280px;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            animation: floatEnvelope 1.2s ease-out;
+        }
+
+        @keyframes floatEnvelope {
+            0% { opacity: 0; transform: translateY(60px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #dbb44b, #b87f2a);
+            border-radius: 18px;
+            box-shadow: 0 35px 55px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,200,0.5);
+            border: 1px solid rgba(212,175,55,0.6);
+        }
+
+        /* Altın desenli zarf detayları */
+        .envelope-body::after {
+            content: "✦";
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: rgba(255,215,0,0.5);
+            font-family: monospace;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e5c263, #b87f2a);
+            border-radius: 18px;
+            clip-path: polygon(0 0, 50% 48%, 100% 0);
+            transform-origin: top;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .envelope-overlay.active .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+
+        /* Davetiye Kartı - Lüks kağıt hissi */
+        .invitation-card {
+            position: absolute;
+            width: 92%;
+            height: 86%;
+            background: linear-gradient(145deg, #fffcf0, #f8efdc);
+            border-radius: 24px;
+            bottom: 8%;
+            left: 4%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(212,175,55,0.7), inset 0 0 0 4px #fef5e6;
+            transform: translateY(25px) scale(0.85);
+            opacity: 0;
+            transition: all 0.7s cubic-bezier(0.34, 1.3, 0.55, 1);
+            transition-delay: 0s;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        .envelope-overlay.active .invitation-card {
+            transform: translateY(-35px) scale(1);
+            opacity: 1;
+            transition-delay: 0.55s;
+        }
+
+        .card-icon {
+            font-size: 3.8rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 6px gold);
+            animation: heartBeat 1.2s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); text-shadow: 0 0 15px #ffc107; }
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: #3e2c1a;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #a28b5c;
+            letter-spacing: 3px;
+            margin-top: 12px;
+            font-weight: 400;
+            border-top: 1px dashed #d4af37;
+            padding-top: 12px;
+        }
+
+        /* Parlama ve Işık Sel efektleri */
+        .premium-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.95) 0%, rgba(255,200,80,0.6) 50%, transparent 100%);
+            z-index: 1002;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-out;
+        }
+
+        .premium-flash.active {
+            opacity: 1;
+        }
+
+        /* Gelişmiş Işık Parçacıkları */
+        .luxury-sparks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1003;
+            overflow: hidden;
+        }
+
+        .luxury-spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffea9e, #ffb347);
+            border-radius: 50%;
+            filter: blur(1px);
+            box-shadow: 0 0 20px 3px #ffd966;
+            animation: sparkFly 0.8s ease-out forwards;
+        }
+
+        @keyframes sparkFly {
+            0% {
+                transform: scale(0) translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5) translateY(-30px) rotate(180deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(0.2) translateY(-80px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Ek ışıltı tozu efekti */
+        .glitter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(212,175,55,0.08) 0px, rgba(212,175,55,0.08) 2px, transparent 2px, transparent 10px);
+            pointer-events: none;
+            z-index: 1004;
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .glitter-overlay.active {
+            opacity: 1;
+            animation: glitterFlash 0.9s 2;
+        }
+
+        @keyframes glitterFlash {
+            0% { opacity: 0; }
+            30% { opacity: 0.7; }
+            100% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .names { font-size: 3rem; letter-spacing: 2px; }
+            .names span { margin: 0 8px; }
+            .subtitle { font-size: 0.7rem; letter-spacing: 6px; margin-bottom: 40px; }
+            .open-btn { padding: 18px 40px; font-size: 0.9rem; letter-spacing: 3px; }
+            .envelope { width: 300px; height: 200px; }
+            .card-title { font-size: 1.5rem; }
+            .card-subtitle { font-size: 0.7rem; letter-spacing: 2px; }
+            .floral-decoration { font-size: 2rem; }
+        }
+
+        @media (max-width: 420px) {
+            .names { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Premium Arka Plan Resim + Gradyan + Bulanıklık -->
+    <div class="premium-bg">
+        <img class="bg-image" src="https://github.com/barisha-app/albumcloud/blob/main/DSCF3761.JPG?raw=true" alt="Romantik Arka Plan" crossorigin="anonymous">
+        <div class="bg-overlay"></div>
+        <div class="light-rays"></div>
+    </div>
+
+    <!-- Dinamik Yıldız Parçacıkları -->
+    <div class="stars-container" id="dynamicStars"></div>
+
+    <!-- Ana İçerik -->
+    <div class="container">
+        <div class="floral-decoration">
+            <i class="fas fa-ring"></i> <i class="fas fa-feather-alt"></i>
+        </div>
+        <h1 class="names">Barış<span>&</span>Helin</h1>
+        <div class="divider"></div>
+        <p class="subtitle">Düğün Davetiyesi</p>
+        <button class="open-btn" id="openBtn">
+            <i class="fas fa-envelope-open-text"></i> Davetiyeyi Aç
+        </button>
+    </div>
+
+    <!-- Zarf Overlay -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <div class="envelope">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="invitation-card">
+                <div class="card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="card-title">Sevgili Misafirimiz</div>
+                <div class="card-subtitle">Sizleri aramızda görmekten mutluluk duyarız...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Işık Sel ve Premium Efektler -->
+    <div class="premium-flash" id="premiumFlash"></div>
+    <div class="luxury-sparks" id="luxurySparks"></div>
+    <div class="glitter-overlay" id="glitterOverlay"></div>
+
+    <script>
+        // ========== 1. GELİŞMİŞ ARKA PLAN YILDIZLARI (çok sayıda ve ışıltılı) ==========
+        function createAdvancedStars() {
+            const starContainer = document.getElementById('dynamicStars');
+            starContainer.innerHTML = '';
+            const starCount = 140;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star-particle');
+                const size = Math.random() * 4 + 1.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                star.style.opacity = Math.random() * 0.6 + 0.2;
+                starContainer.appendChild(star);
+            }
+        }
+        createAdvancedStars();
+
+        // ========== 2. IŞIK PARÇACIKLARI (LÜKS VERSİYON) ==========
+        function createLuxurySparks() {
+            const sparksContainer = document.getElementById('luxurySparks');
+            sparksContainer.innerHTML = '';
+            const particleCount = 140;
+            for (let i = 0; i < particleCount; i++) {
+                const spark = document.createElement('div');
+                spark.classList.add('luxury-spark');
+                spark.style.left = Math.random() * 100 + '%';
+                spark.style.top = Math.random() * 100 + '%';
+                spark.style.width = (Math.random() * 9 + 3) + 'px';
+                spark.style.height = spark.style.width;
+                spark.style.animationDelay = (Math.random() * 0.2) + 's';
+                spark.style.filter = `blur(${Math.random() * 2}px)`;
+                sparksContainer.appendChild(spark);
+            }
+        }
+
+        // ========== 3. EXTRA IŞIK PARLAMASI VE GEÇİŞ ==========
+        function triggerPremiumEffects() {
+            const flash = document.getElementById('premiumFlash');
+            const glitter = document.getElementById('glitterOverlay');
+            const sparksDiv = document.getElementById('luxurySparks');
+            
+            // Işık patlaması
+            flash.classList.add('active');
+            setTimeout(() => {
+                flash.classList.remove('active');
+            }, 550);
+            
+            // Glitter overlay ani ışıltı
+            glitter.classList.add('active');
+            setTimeout(() => {
+                glitter.classList.remove('active');
+            }, 900);
+            
+            // Parçacıkları oluştur ve göster
+            createLuxurySparks();
+            
+            // 0.4 saniye sonra parçacıkları temizle (görsel şölen için)
+            setTimeout(() => {
+                if(sparksDiv) sparksDiv.innerHTML = '';
+            }, 1000);
+        }
+
+        // ========== 4. BUTON TIKLAMA & ZARF AÇILMA + YÖNLENDİRME ==========
+        const openBtn = document.getElementById('openBtn');
+        const overlay = document.getElementById('envelopeOverlay');
+        
+        // Kullanıcı deneyimi için butona tıklama
+        openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Buton geçici olarak devre dışı
+            openBtn.style.pointerEvents = 'none';
+            openBtn.style.transform = 'scale(0.98)';
+            openBtn.style.opacity = '0.8';
+            
+            // Zarf overlay aktif
+            overlay.classList.add('active');
+            
+            // Zarif bir ses efekti yok ama görsel şölen başlasın
+            // Zarfın açılması 0.55sn sonra kart tam çıkar, 1.2sn sonra premium parlamalar
+            setTimeout(() => {
+                // Kart görünür hale gelir gelmez ihtişamlı efektler
+                triggerPremiumEffects();
+                
+                // Işık patlaması ve parıltıdan sonra yönlendirme
+                setTimeout(() => {
+                    // Yönlendirme: orijinal site
+                    window.location.href = 'http://www.haberakedemi.com.tr/barishelin/';
+                }, 800);
+            }, 1000);
+        });
+        
+        // ========== 5. EK MİKRO ANİMASYONLAR - Sayfa yüklenince butona hafif nefes efekti ==========
+        window.addEventListener('load', () => {
+            // Butona soft odak
+            openBtn.style.animation = 'gentlePulse 2s infinite';
+            // Ekstra yıldız canlandırması periyodik
+            setInterval(() => {
+                const stars = document.querySelectorAll('.star-particle');
+                if (stars.length > 0 && !overlay.classList.contains('active')) {
+                    // Rastgele birkaç yıldızı parlat
+                    for (let i = 0; i < 5; i++) {
+                        const randomStar = stars[Math.floor(Math.random() * stars.length)];
+                        if(randomStar) {
+                            randomStar.style.transform = 'scale(1.4)';
+                            randomStar.style.opacity = '1';
+                            setTimeout(() => {
+                                if(randomStar) randomStar.style.transform = '';
+                            }, 300);
+                        }
+                    }
+                }
+            }, 1800);
+        });
+        
+        // Arka plan fotoğrafının yüklenmesini kontrol et, hata olursa siyah gradyan kalsın
+        const bgImg = document.querySelector('.bg-image');
+        if(bgImg) {
+            bgImg.onerror = function() {
+                this.style.display = 'none';
+                const premiumBg = document.querySelector('.premium-bg');
+                if(premiumBg) premiumBg.style.background = 'radial-gradient(circle at center, #1f1912, #0a0806)';
+            };
+        }
+        
+        // Ekstra hareket: fare ile ışık kayması efekti (opsiyonel lüks)
+        document.body.addEventListener('mousemove', (e) => {
+            const rays = document.querySelector('.light-rays');
+            if(rays && !overlay.classList.contains('active')) {
+                let x = (e.clientX / window.innerWidth) * 20;
+                let y = (e.clientY / window.innerHeight) * 20;
+                rays.style.backgroundPosition = `${x}px ${y}px`;
+            }
+        });
+        
+        // Mobil için dokunmatik hareket hafif
+        document.body.addEventListener('touchmove', (e) => {
+            const rays = document.querySelector('.light-rays');
+            if(rays && !overlay.classList.contains('active') && e.touches[0]) {
+                let x = (e.touches[0].clientX / window.innerWidth) * 20;
+                let y = (e.touches[0].clientY / window.innerHeight) * 20;
+                rays.style.backgroundPosition = `${x}px ${y}px`;
+            }
+        });
+    </script>
+</body>
+</html>
